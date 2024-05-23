@@ -27,13 +27,12 @@ class Solution{
         {
             return 0;
         }
-        // code here
         for(int i=2; i<=Math.sqrt(N);i++)
         {
             if(N%i==0)
-            return 0;
+            return 0;//not prime
             
         }
-        return 1;
+        return 1;//prime
     }
 }
