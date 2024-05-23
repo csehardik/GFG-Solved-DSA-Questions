@@ -22,13 +22,21 @@ class GFG {
 class Solution {
     static String armstrongNumber(int n){
         
-        int x = n%10;
-        int y = (n/10)%10;
-        int z = n/100;
-        
-        if(x*x*x+y*y*y+z*z*z == n)
-        return "Yes";
-        else
-        return "No";
+      int sum = 0;
+      int temp = n;
+      int revnum = 0;
+      
+      while(n>0){
+          int ld = n%10;
+          sum = sum+(ld*ld*ld);
+          n=n/10;
+          revnum = (revnum*10)+ld;
+      }
+      if(sum == temp){
+          return "Yes";
+      }
+      else{
+          return "No";
+      }
     }
 }
