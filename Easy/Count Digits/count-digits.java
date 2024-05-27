@@ -22,24 +22,25 @@ class GFG
 // } Driver Code Ends
 
 
+
+
 //User function Template for Java
 
 
 class Solution{
     static int evenlyDivides(int N){
+        // code here
         
-        int count=0;
+        int count =0;
         int num = N;
         while(num>0){
-        
-        int lastdigit = num%10;
-    
-        if(lastdigit > 0 && N % lastdigit == 0){
-        count++;
+            int ld = num%10;
+            
+            if(ld>0 && N%ld == 0){
+                count++;
+            }
+            num = num/10;
         }
-        num = num/10;
-        }
-     
-        return count;   
+        return count;
     }
 }
