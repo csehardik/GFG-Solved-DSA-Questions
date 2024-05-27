@@ -30,7 +30,7 @@ class Solution {
           int ld = n%10;
           sum = sum+(ld*ld*ld);
           n=n/10;
-          revnum = (revnum*10)+ld;
+        //   revnum = (revnum*10)+ld;
       }
       if(sum == temp){
           return "Yes";
