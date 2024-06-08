@@ -20,17 +20,18 @@ class GFG
 
 
 class Solution{
-    static int isPrime(int n){
+    static int isPrime(int N){
         // code here
-        if(n==0 || n==1){
-            return 0;//not prime
+        
+        if(N==0 || N==1){
+            return 0;
         }
         
-        for(int i=2;i<=Math.sqrt(n);i++){
-            if(n%i == 0){
-                return 0;//not prime
+        for(int i=2;i<=Math.sqrt(N);i++){
+            if(N%i==0){
+                return 0;
             }
         }
-        return 1;//prime number
+        return 1;
     }
 }
