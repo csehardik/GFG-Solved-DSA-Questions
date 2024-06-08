@@ -26,7 +26,10 @@ class GFG {
 
 class Solution {
     static Long[] lcmAndGcd(Long A , Long B) {
+        // code here
+        
         Long ans[] = new Long[2];
+        
         
         ans[1] = gcd(A,B);
         ans[0] = lcm(A,B,ans[1]);
@@ -37,19 +40,18 @@ class Solution {
     static long lcm(long A,long B,long gcd){
         return A*B/gcd;
     }
+    
     static long gcd(long A,long B){
-        if(A == 0)
-            return B;
-            
-        if(B == 0)
-        return A;
         
-        if(A == B)
-        return A;
+        if(A==0)
+            return B;
+        
+        if(B==0)
+            return A;
         
         if(A>B)
-        return gcd(A-B,B);
-        
-        return gcd(A,B-A);
+            return gcd(A-B,B);
+            
+            return gcd(A,B-A);
     }
 };
