@@ -22,8 +22,6 @@ class GFG
 // } Driver Code Ends
 
 
-
-
 //User function Template for Java
 
 
@@ -32,14 +30,16 @@ class Solution{
         // code here
         
         int count =0;
+        
         int num = N;
+        
         while(num>0){
-            int ld = num%10;
+            int lastDigit = num%10;
             
-            if(ld>0 && N%ld == 0){
+            if(lastDigit>0 && N%lastDigit == 0){
                 count++;
             }
-            num = num/10;
+            num=num/10;
         }
         return count;
     }
