@@ -54,11 +54,28 @@ class Sorting
 
 class Solution
 {
-    //Function to sort the binary array.
-    static void binSort(int A[], int N)
+    //Function to sort the bin
+    static void binSort(int arr[], int N)
     {
-        // add your code here
-        Arrays.sort(A);
+    
+        // Arrays.sort(A);
+        
+        int left = 0;
+        int right = N-1;
+        
+        while(left<=right){
+            if(arr[left] == 0){
+                left++;
+            }
+            else if(arr[right] == 1){
+                right--;
+            }
+            else{
+                int temp = arr[right];
+                arr[right] = arr[left];
+                arr[left] = temp;
+            }
+        }
         
         /**************
         * No need to print the array
