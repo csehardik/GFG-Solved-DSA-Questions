@@ -46,29 +46,79 @@ class GFG {
 class Solve {
     int[] findTwoElement(int arr[], int n) {
         
-        int[] result = new int[2];
+//         Why Use count Array Instead of a Single Variable count?
+// Multiple Elements to Track:
+
+// In the problem where you need to find both a repeating and a missing element, you have two distinct values to identify (result[0] for repeating and result[1] for missing). Using a single variable count would not be sufficient because it can only track one value at a time.
+// Efficient Tracking:
+
+// Using an array count allows us to efficiently track occurrences of each element from 1 to n. Each index in the count array corresponds directly to an element in arr, making it straightforward to increment counts and later check those counts to determine which elements are repeated or missing.
+// Direct Indexing for Identification:
+
+// Once we have populated the count array with the occurrences of each element in arr, we can directly iterate through this array (from 1 to n) to find:
+// The index where count[i] == 2 indicates the repeating element (result[0]).
+// The index where count[i] == 0 indicates the missing element (result[1]).
+// Clear and Structured Solution:
+
+// Using an array count provides a structured and clear approach to solving the problem. It separates the counting logic from the identification logic, which makes the code easier to understand and maintain.
         
-        // Array to track occurrences of each element
-        int[] count = new int[n + 1];
+        //Brute force approach
         
-        // Count occurrences of each element in arr
-        for (int i = 0; i < n; i++) {
-            count[arr[i]]++;
-        }
+        // int[] result = new int[2];
         
-        // Find repeating and missing elements
-        for (int i = 1; i <= n; i++) {
-            if (count[i] == 2) {
-                result[0] = i; // Repeating element
-            }
-            if (count[i] == 0) {
-                result[1] = i; // Missing element
-            }
-        }
+        // // Array to track occurrences of each element
+        // int[] count = new int[n + 1];
         
-        return result;
+        // // Count occurrences of each element in arr
+        // for (int i = 0; i < n; i++) {
+        //     count[arr[i]]++;
+        // }
         
-        //BRUTE FORCE APPROACH(ONLY 2 TEST CASES PASSED)
+        // // Find repeating and missing elements
+        // for (int i = 1; i <= n; i++) {
+        //     if (count[i] == 2) {
+        //         result[0] = i; // Repeating element
+        //     }
+        //     if (count[i] == 0) {
+        //         result[1] = i; // Missing element
+        //     }
+        // }
+        
+        // return result;
+        
+        
+        
+        
+        //2nd Aproach -- > better aproach
+        // This approach runs in O(n) time complexity since it involves a single pass 
+        // through the array arr to populate hash and another pass through hash
+        // to find the repeating and missing elements.
+        
+        // int hash[] = new int[n+1];
+        
+        // for(int i=0;i<n;i++){
+        //     hash[arr[i]]++;
+        // }
+        
+        
+        // int missing = -1;
+        // int repeating =-1;
+        
+        // for(int i=1;i<=n;i++){
+        //     if(hash[i]==2)//so checking here that ki i index agar teri count 2 h toh tu mera repeating element
+        //     {
+        //         repeating = i;
+        //     }
+        //     if(hash[i] == 0)//so checking here that ki i index agar teri count 0 h toh tu mera repeating element
+        //     {
+        //         missing = i;
+        //     }
+        // }
+        
+        // return new int[]{repeating,missing};
+        
+        
+        //my first approach after seeing the question(ONLY 2 TEST CASES PASSED)
         
     //       int[] result = new int[2];
     //     int x=1;
@@ -100,34 +150,32 @@ class Solve {
         
         
         
-        //OPTIMIZED APPROACH(10 TEST CASES STILL LEFT TO PASS)
+        //OPTIMIZED APPROACH ==> T(C) == O(N) & S(C) == O(1)
         
-        // int[] result = new int[2];
+        long N = n;
         
+        long sn = (N * (N + 1)) / 2; // Sum of first n natural numbers
+        long s2n = (N * (N + 1) * (2 * N + 1)) / 6; // Sum of squares of first n natural numbers
         
-        // // Step 1: Find the repeated element
+        long sumofallelementsofarr = 0; 
+        long s2 = 0;//s2 ==> sum of squares of all the elements in the array arr
         
-        // Set<Integer> set = new HashSet<>();
-        // int repeat = -1;
+        // Calculate sum and sum of squares of elements in arr
+        for (int i = 0; i < n; i++) {
+            sumofallelementsofarr = sumofallelementsofarr + arr[i];
+            s2 += (long)arr[i] * (long)arr[i];
+        }
         
-        // for (int num : arr) {
-        //     if (!set.add(num)) {
-        //         repeat = num;
-        //         break;
-        //     }
-        // }
+        long val1 = sumofallelementsofarr - sn;//x-y // Difference in sum gives the difference between repeating and missing numbers
+        long val2 = s2 - s2n; // Difference in sum of squares gives the sum of squares of repeating and missing numbers
         
-        // // Step 2: Find the missing element
-        // int shouldSum = n * (n + 1) / 2; // Sum of first n natural numbers
-        // int actualSum = 0;
-        // for (int num : arr) {
-        //     actualSum += num;
-        // }
-        // int missing = shouldSum - (actualSum - repeat);
+         val2 = val2 / val1;//x+y
         
-        // result[0] = repeat;
-        // result[1] = missing;
+        // Calculate x (missing) and y (repeating)
+        long x = (val1 + val2) / 2;
+        long y = x - val1;
         
-        // return result;
+        return new int[]{(int)x, (int)y};
+
     }
 }
